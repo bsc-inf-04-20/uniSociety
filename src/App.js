@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./styles.css"
+import Loginpage from "./components/LoginPage"
+import { useState } from "react"
+import OriginalPage from "./components/OriginalPage";
+import CreateAccount from "./components/createAccount";
+import Profile from "./components/pages/Profile";
+import authContext from './contexts/authContext';
+import ExternalRoutes from './components/pages/ExternalRoutes';
+import userContext from "./contexts/userContext";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+
+export default function App(){
+ const [user, setUser]=useState(-1)
+
+ const [showNavBar, setShowNavBar]=useState(false);
+
+ const [token, setToken]=useState("");
+
+ const [userinfo, setUserinfo]=useState({});
+
+ return(
+  <userContext.Provider value={{user, token, setUser, setToken, showNavBar, setShowNavBar, userinfo, setUserinfo}}>
+  <ExternalRoutes token={token} setToken={setToken} setUser={setUser}/>
+  </userContext.Provider>
+ )
+
+
 }
 
-export default App;
